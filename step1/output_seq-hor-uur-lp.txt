@@ -1,0 +1,4 @@
+Solving...
+World view: 1
+&m{chosen("move_d1_from_d2_to_peg1")} &m{chosen("move_d1_from_d2_to_peg2")} &m{chosen("move_d1_from_d2_to_peg3")} &m{plan("move_d1_from_peg1_to_d2",1)} &m{plan("move_d1_from_peg2_to_d2",1)} &m{plan("move_d1_from_peg3_to_d2",1)}
+SATISFIABLE

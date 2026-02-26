@@ -1,0 +1,3 @@
+disk(d1). disk(d2).
+location(peg1). location(peg2). location(peg3).
+location(D) :- disk(D).

@@ -1,0 +1,60 @@
+fluents:
+on(D,L) requires disk(D), location(L).
+clear(L) requires location(L).
+bar_on(D,L) requires disk(D), location(L).
+bar_clear(L) requires location(L).
+sep_occ.
+goal_cond.
+start_cond.
+
+actions:
+move(D,L,L1) requires disk(D), location(L), location(L1).
+sep.
+
+always:
+executable move(D,L,L1) if on(D,L), clear(L1), clear(D).
+nonexecutable move(D,L,L).
+nonexecutable move(d2,L,d1).
+caused on(D,L1) after move(D,L,L1), not sep.
+caused -on(D,L) after move(D,L,L1), not sep.
+inertial on(D,L).
+caused clear(L) after move(D,L,L1), not sep.
+caused -clear(L1) after move(D,L,L1), not sep.
+inertial clear(L).
+forbidden on(D,L), on(D,L1), L<>L1.
+forbidden on(D,D).
+forbidden on(d2,d1).
+noConcurrency.
+nonexecutable move(D,L,L1) if sep.
+executable sep if on(d1,d2) , on(d2,peg1) , clear(d1) , clear(peg2) , clear(peg3), -sep_occ.
+caused bar_on(D,L) after bar_on(D,L).
+caused -bar_on(D,L) after -bar_on(D,L).
+caused on(D,L) after on(D,L), sep.
+caused -on(D,L) after -on(D,L), sep.
+caused -goal_cond if on(D,L), -bar_on(D,L).
+caused -goal_cond if -on(D,L), bar_on(D,L).
+caused bar_clear(L) after bar_clear(L).
+caused -bar_clear(L) after -bar_clear(L).
+caused clear(L) after clear(L), sep.
+caused -clear(L) after -clear(L), sep.
+caused -goal_cond if clear(L), -bar_clear(L).
+caused -goal_cond if -clear(L), bar_clear(L).
+caused sep_occ after sep.
+caused sep_occ after sep_occ.
+caused -sep_occ after -sep_occ, not sep.
+caused -goal_cond if -sep_occ.
+caused goal_cond if not -goal_cond.
+
+initially:
+-sep_occ.
+caused bar_on(D,L) if on(D,L).
+caused -bar_on(D,L) if -on(D,L).
+total on(D,L).
+caused bar_clear(L) if clear(L).
+caused -bar_clear(L) if -clear(L).
+total clear(L).
+caused start_cond if on(d1,d2) , on(d2,peg3) , clear(d1) , clear(peg1) , clear(peg2).
+caused false if not start_cond.
+
+goal:
+goal_cond?

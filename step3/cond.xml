@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE conditions SYSTEM "../../RevPlan/bin/DTD/conditions.dtd">
+<conditions>
+            <phi>
+                <!-- Stato iniziale: torre completa su peg1
+                     (qualunque stato da cui il piano parte) -->
+                <and>
+                    <term> on(d1,d2) </term>
+                    <term> on(d2,peg1) </term>
+                    <term> clear(d1) </term>
+                    <term> clear(peg2) </term>
+                    <term> clear(peg3) </term>
+                </and>
+            </phi>
+            <psi>
+                <!-- Stato goal: torre completa su peg3
+                     RevPlan cercherà piani che da questo stato
+                     tornino a uno stato che soddisfa phi -->
+                <and>
+                    <term> on(d1,d2) </term>
+                    <term> on(d2,peg3) </term>
+                    <term> clear(d1) </term>
+                    <term> clear(peg1) </term>
+                    <term> clear(peg2) </term>
+                </and>
+            </psi>
+</conditions>

@@ -1,0 +1,30 @@
+fluents:	on(D,L) requires disk(D), location(L).
+		clear(L) requires location(L).
+
+actions:	move(D,L,L1) requires disk(D), location(L), location(L1).
+
+always:		executable move(D,L,L1) if on(D,L), clear(L1), clear(D).
+                nonexecutable move(D,L,L).
+                nonexecutable move(d2,L,d1).
+
+                caused on(D,L1) after move(D,L,L1).
+                caused -on(D,L) after move(D,L,L1).
+                inertial on(D,L).
+
+                caused clear(L) after move(D,L,L1).
+                caused -clear(L1) after move(D,L,L1).
+                inertial clear(L).
+
+                forbidden on(D,L), on(D,L1), L<>L1.
+                forbidden on(D,D).
+                forbidden on(d2,d1).
+
+noConcurrency.
+
+initially:      on(d1,d2).
+                on(d2,peg1).
+                clear(d1).
+                clear(peg2).
+                clear(peg3).
+
+goal:           on(d1,d2), on(d2,peg3)? (7)
